@@ -91,14 +91,7 @@ Marker.prototype = {
 		}
 	},
 	create: function() {
-		this.marker = new google.maps.Marker(this.options);
-		return this.marker;
-
-	},
-	addEvent: function(eventType, callback) {
-		if (this.marker) {
-			google.maps.event.addListener(this.marker, eventType, callback);
-		}
+		return new google.maps.Marker(this.options);
 	}
 }
 

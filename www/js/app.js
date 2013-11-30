@@ -44,8 +44,8 @@ function setCurrentPosition(map) {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 
-function placeStripeMarkers() {
-
+function placeStripeMarkers() 
+{
     var i;
     for (i = 0; i < stripesList.length; i++) {
         var markerObject = new Marker(this.map);
@@ -54,17 +54,17 @@ function placeStripeMarkers() {
         markerObject.title(stripesList[i].name);
 
         var marker = markerObject.create();
-        stripeMarkers.push(marker);
+        markerClickEvent(marker, stripesList[i])
+        // stripeMarkers.push(marker);
     }
-    var i;
-    for (i = 0; i < stripeMarkers.length; i++) {
-        markerClickEvent(stripeMarkers[i], stripesList[i]);
-        // google.maps.event.addListener(stripeMarkers[i], 'click', stripeClickEvent(stripesList[i]))
-    }
+    // for (i = 0; i < stripeMarkers.length; i++) {
+    //     markerClickEvent(stripeMarkers[i], stripesList[i]);
+    // }
 
 }
 
-function markerClickEvent(marker, stripe) {         
+function markerClickEvent(marker, stripe) 
+{         
     google.maps.event.addListener(marker, 'click', function() {
         $('#map-canvas').css('opacity', '0.1');
         $('#stripe-area').css('visibility', 'visible');
