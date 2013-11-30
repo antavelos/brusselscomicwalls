@@ -16,8 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var currentPositionMarker;
+var map;
 var app = {
-    // Application Constructor
     initialize: function() {
         this.bindEvents();
     },
@@ -30,24 +31,12 @@ var app = {
             $('#stripe-area').css('visibility', 'hidden');            
         });
     },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
     },
-    // Update DOM on a Received Event
-/*    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
+    receivedEvent: function(id) {
         console.log('Received Event: ' + id);
-    },*/
+    },
     initializeMap: function() {
         var center = new google.maps.LatLng(50.8500, 4.3500);
         var mapOptions = {
@@ -55,31 +44,33 @@ var app = {
             zoom: 13,
             disableDefaultUI: true
         };
-        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-
-
-        var onSuccess = function(position) {
-
-            var currentPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            var currentPositionMarker = new google.maps.Marker({
-                position: currentPos,
-                map: map,
-                icon: currentPositionMarkerIcon,
-                title: 'Hello World!'
-            });
-            createStripeMarkers(map);
-        };
-
-        // onError Callback receives a PositionError object
-        //
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' +
-                  'message: ' + error.message + '\n');
-        }
-
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);        
+        setCurrentPosition();
+        createStripeMarkers(map);
     }
 };
+
+function setCurrentPosition() {
+    var onSuccess = function(position) {
+
+        var currentPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        if (currentPositionMarker != undefined) {
+            currentPositionMarker.setMap(null);
+        }
+        currentPositionMarker = new google.maps.Marker({
+            position: currentPos,
+            map: map,
+            icon: currentPositionMarkerIcon,
+            title: 'Hello World!'
+        });
+    };
+
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+    }
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+}
 
 function createStripeMarkers(map) 
 {
