@@ -1,4 +1,4 @@
 # Brussels Comic Walls
 
-This is a mobile applications developped for various devices using [PhoneGap](http://phonegap.com/) 
+This is a mobile application developped for various devices using [PhoneGap](http://phonegap.com/) 
 
