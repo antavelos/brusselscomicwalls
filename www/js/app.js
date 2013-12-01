@@ -70,9 +70,9 @@ function markerClickEvent(marker, stripe)
         $('#stripe-area').css('visibility', 'visible');
 
         var stripeContent = '<img src="' + stripe.src + '">';
-        stripeContent += '<span id="stripe-name">"' + stripe.name + '" by ' + stripe.artist + '</span><br />';
-        stripeContent += '<span id="stripe-address">@ ' + stripe.address + '</span>';
+        stripeContent += '<div id="stripe-info"><span id="stripe-name">"' + stripe.name + '" by ' + stripe.artist + '</span><br />';
+        stripeContent += '<span id="stripe-address">@ ' + stripe.address + '</span></div>';
 
-        $('#stripe').html(stripeContent);    
+        $('#stripe-image').html(stripeContent);    
     }); 
 }
