@@ -44,12 +44,12 @@ function MarkerException(message){
 	};
 }
 
-function Marker(map) {
+function Marker() {
 	// if (typeof map != defined) {
 	// 	throw MarkerException("A map object should be passsed as argument.");
 	// }
 	this.options = {
-		map: map,
+		map: null,
 		icon: null
 	}
 	this.marker = null;
@@ -57,6 +57,9 @@ function Marker(map) {
 
 Marker.prototype = {
 	contructor: Marker,
+	map: function(map) {
+		this.options.map = map;
+	},
 	position: function(lat, lng) {
 		if (arguments.length == 2) {  // TODO extra sanity check for lat, lng 
 			this.options.position = new google.maps.LatLng(lat, lng);
@@ -68,14 +71,14 @@ Marker.prototype = {
 			throw new MarkerException('2 arguments needed ');
 		}
 	},
-	icon: function(image) {
-		if (arguments.length == 1) {
+	icon: function(image, width, height) {
+		if (arguments.length == 3) {
 			this.options.icon = new google.maps.MarkerImage(
 		        image,
 		        null, /* size is determined at runtime */
 		        null, /* origin is 0,0 */
 		        null, /* anchor is bottom center of the scaled image */
-		        new google.maps.Size(32, 32)
+		        new google.maps.Size(width, height)
 		    );
 		}
 		else{
@@ -91,7 +94,8 @@ Marker.prototype = {
 		}
 	},
 	create: function() {
-		return new google.maps.Marker(this.options);
+		this.marker = new google.maps.Marker(this.options);
+		return this;
 	}
 }
 
