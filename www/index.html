@@ -33,26 +33,51 @@
         </script>
       </head>
       <body>
-        <div id="map-canvas"></div>
-        <div id="stripe-area">
-            <div id="stripe-image">
-                <img src="img/stripes/brussaille.jpg">
-                <div id="stripe-info">
-                    <span id="stripe-name">"TinTin in America" by Herge</span><br />
-                    <span id="stripe-address">@ Midi Station</span>
-                </div>
+
+        <div id="menu">
+            <div id="map-button" >
+                <img src="img/map-button.png">
             </div>
-            <div id="close-button">
-                <img src="img/close-button.png">
+            <div id="gallery-button">
+                <img src="img/gallery-button.png">
+            </div>
+        </div>
+            
+        <div id="map-canvas"></div>
+
+
+        <div id="gallery">
+            <div id="gallery-image-area">
+                <img src="">
+            </div>
+            <div id="left-arrow">
+                <img src="img/left-arrow.png">
+            </div>
+            <div id="right-arrow">
+                <img src="img/right-arrow.png">
+            </div>
+            <div id="gallery-image-info">
             </div>
         </div>
 
-        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<!--         <div id="marker-image">
+            <div id="marker-image-area">
+                <img src="">
+            </div>
+            <div id="close-marker-image-button">
+                <img src="img/close-button.png">
+            </div>
+            <div id="marker-image-info">
+            </div>
+        </div> -->
+
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="js/arrayFactory.js"></script>
+        <script type="text/javascript" src="js/effects.js"></script>
         <script type="text/javascript" src="js/object.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript">
-            app = new App();
             app.initialize();
         </script>
     </body>
