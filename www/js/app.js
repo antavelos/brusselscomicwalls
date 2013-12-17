@@ -6,14 +6,34 @@ var app = {
     stripeMarkers: new Array(),
 
     initialize: function() {
-        // document.addEventListener('deviceready', app.onDeviceReady, false);
+        document.addEventListener('deviceready', app.onDeviceReady, false);
+        window.addEventListener('load', function() {
+            FastClick.attach(document.body);
+        }, false);
         google.maps.event.addDomListener(window, 'load', app.initializeMap);
     },
 
     onDeviceReady: function() {
+        document.addEventListener("backbutton", app.yourCallbackFunction, false);
         // this.initializeMap('deviceready');
     },
-
+    yourCallbackFunction: function() {
+        if (flag == 1) {
+            document.getElementById("gallery").style.webkitTransform = "translate(-100%, 0)";
+            flag = 0;
+        }
+        else {
+            navigator.app.exitApp();
+        }
+    },
+    help: function() {
+        if (document.getElementById("gallery").style.webkitTransform == "translate(0, 0)") {
+            document.getElementById("gallery").style.webkitTransform = "translate(-100%, 0)";
+        }
+        else {
+            navigator.app.exitApp();
+        }
+    },
     initializeMap: function() {
 
         var mapOptions = {            
@@ -59,8 +79,6 @@ var app = {
     {
         var markerClickEvent = function(marker, index) {         
             google.maps.event.addListener(marker, 'click', function() {
-
-
                 setNextImage(stripeArrayIndexes[index]);
                 $("#gallery").css('left', "0");
                 // $("#marker-image-area").find("img").attr("src", stripe.src);
@@ -78,7 +96,7 @@ var app = {
             markerObject.title(stripesList[i].name);
 
             var marker = markerObject.create();
-            markerClickEvent(marker.marker, i);
+            //markerClickEvent(marker.marker, i);
             app.stripeMarkers.push(marker);
         }
         // for (i = 0; i < stripeMarkers.length; i++) {
