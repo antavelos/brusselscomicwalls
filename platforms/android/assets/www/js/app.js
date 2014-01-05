@@ -11,7 +11,20 @@ var app = {
         window.addEventListener('load', function() {
             FastClick.attach(document.body);
         }, false);
-        google.maps.event.addDomListener(window, 'load', app.initializeMap);
+        // google.maps.event.addDomListener(window, 'load', app.initializeMap);
+
+        var content = "<li><label></label></li>";
+        for (var i = 0; i < stripesList.length; i++) {
+            content += '<li><a href="#mural-' + i + '" id="mural-'+ i +'">' + stripesList[i].name +'</a></li>'
+        }
+        $(".main-section").find('ul').html(content);
+        
+        // for (var i = 0; i < stripesList.length; i++) {
+        //     $("#mural-" + i).click(function(){
+        //         alert($(this).html());
+        //     });
+        // }
+        
     },
 
     onDeviceReady: function() {
